@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍔 FoodHub
 
-## Getting Started
+A modern **Food Ordering & Restaurant Management Platform** built with **Next.js, Express.js, Prisma, and PostgreSQL**. The platform supports multiple user roles and provides a seamless experience for customers, restaurant owners, and administrators.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📖 Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+FoodHub is a full-stack web application where customers can discover restaurants, browse menus, add food items to their cart, and place orders. Restaurant owners can register and manage one or more restaurants, while administrators oversee users, restaurants, and platform activities.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Live Demo
 
-## Learn More
+**Frontend:** https://foodhub-frontend-gray.vercel.app/
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📸 Screenshot
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> <img width="1521" height="613" alt="foodhub" src="https://github.com/user-attachments/assets/72576a91-714c-4ce6-8a9e-b95afd5e621c" />
+
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+### Backend
+
+- Express.js
+- Node.js
+- Prisma ORM
+
+### Database
+
+- PostgreSQL
+
+---
+
+## ✨ Features
+
+### 👤 Customer
+
+- User Registration & Login
+- Browse Restaurants
+- Browse Food Menu
+- Search Food Items
+- Add to Cart
+- Place Orders
+- Order History
+
+### 🍽️ Restaurant Owner
+
+- Register Restaurants
+- Manage Multiple Restaurants
+- Add, Edit & Delete Menu Items
+- Manage Orders
+
+### 🛡️ Admin
+
+- Manage Users
+- Manage Restaurants
+- Monitor Platform Activities
+- Moderate Restaurant Owners
+
+---
+
+## 📦 Main Dependencies
+
+### Frontend
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Axios
+
+### Backend
+
+- Express.js
+- Prisma
+- PostgreSQL
+- JWT Authentication
+- bcrypt
+- dotenv
+
+---
+
+
+
+---
+
+## 📌 Future Improvements
+
+- Online Payment Integration
+- Restaurant Analytics Dashboard
+- Ratings & Reviews
+- Notifications
+- Coupon System
+
+---
+
+## 👨‍💻 Author
+
+**Abtahi Mustakim**
+
+GitHub: https://github.com/Abtahi71
+
+LinkedIn: https://www.linkedin.com/in/abtahi-mustakim-84449b30a/
