@@ -16,6 +16,7 @@ const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
       if (!response.ok) {
         throw new Error("Failed to fetch categories");
       }
+      // console.log("THIS IS THE CATEGORY RESPONSE", response);
       const data = await response.json();
       return data.categories;
     } catch (e: any) {
@@ -88,6 +89,12 @@ const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
     const res = await fetch(`${NEXT_PUBLIC_API_URL}/meal?${query.toString()}`, {
       cache: "no-store",
     });
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error(text);
+      throw new Error(`Request failed with status ${res.status}`);
+    }
 
     // if (!res.ok) {
     //   console.log(res.json())

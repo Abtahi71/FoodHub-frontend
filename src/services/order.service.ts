@@ -22,7 +22,7 @@ const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
         }
       );
       if (!response.ok) {
-        console.log("Failed to add to cart", response.statusText);
+        console.log("Failed to add to cart",response);
         throw new Error("Failed to add to cart");
       }
       const data = await response.json();

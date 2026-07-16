@@ -45,9 +45,12 @@ export default function Navbar() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [loggingIn, setLoggingIn] = useState(false);
   const pathname = usePathname();
 
   const signOut = async () => {
+    setLoggingOut(true);
     await UserLogOut()
     router.refresh();
     router.push("/login");
@@ -190,7 +193,7 @@ useEffect(()=>{
                       className="text-gray-600 hover:text-red-600 hover:bg-red-50"
                     >
                       <LogOut className="h-4 w-4 mr-1" />
-                      <span className="hidden lg:inline">Logout</span>
+                      <span className="hidden lg:inline">{loggingOut ? "Logging out..." : "Logout"}</span>
                     </Button>
                   </div>
                 ) : (

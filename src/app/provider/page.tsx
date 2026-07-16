@@ -32,7 +32,7 @@ const CUISINE_OPTIONS = [
 export default function ProviderRegister() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(false);
   const [selectedCuisines, setSelectedCuisines] = useState<string[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");

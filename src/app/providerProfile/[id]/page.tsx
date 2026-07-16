@@ -175,12 +175,12 @@ export default function ProviderDashboard() {
               className="overflow-hidden hover:shadow-lg transition-shadow"
             >
               <div className="relative h-48 w-full">
-                {/* <Image
+                <Image
                   src={restaurant.image || "/restaurant-placeholder.jpg"}
                   alt={restaurant.restaurantName}
                   fill
                   className="object-cover"
-                /> */}
+                />
                 <div className="absolute top-2 right-2">
                   <Badge
                     variant={restaurant.isOpen ? "default" : "secondary"}

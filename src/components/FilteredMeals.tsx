@@ -172,7 +172,7 @@ export default function FilteredMealCard() {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">All Categories</option>
-                {categories.map((cat: any) => (
+                {categories?.map((cat: any) => (
                   <option key={cat.id} value={cat.name}>
                     {cat.name}
                   </option>

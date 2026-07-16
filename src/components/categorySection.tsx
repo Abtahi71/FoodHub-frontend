@@ -83,7 +83,7 @@ export default function CategorySection() {
           )}
 
           {/* Category Buttons */}
-          {categories.map((category: any) => (
+          {categories?.map((category: any) => (
             <button
               key={category.name}
               onClick={() => handleClick(category.name)}

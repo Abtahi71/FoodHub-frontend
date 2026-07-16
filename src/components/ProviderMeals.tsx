@@ -328,7 +328,7 @@ export default function ProviderMeals({ id }: { id: string }) {
             {/* Meal Image */}
             <div className="relative h-48 w-full">
               <Image
-                src={item.image || "/placeholder-meal.jpg"}
+                src={item.image}
                 alt={item.meal.name}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"

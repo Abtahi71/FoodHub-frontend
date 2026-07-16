@@ -58,6 +58,7 @@ const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
         }
       );
       if (!response.ok) {
+        console.log("Failed to fetch reviews", response);
         throw new Error("Failed to fetch reviews");
       }
       const data = await response.json();

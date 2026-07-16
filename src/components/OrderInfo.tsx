@@ -161,7 +161,7 @@ export default function OrderInfo() {
             
             <Button
               type="submit"
-              disabled={!deliveryAddress || !contact || isSubmitting}
+              disabled={!deliveryAddress || !contact || isSubmitting || disable}
               className={`
                 w-full py-4 rounded-xl font-semibold text-lg transition-all
                 ${(!deliveryAddress || !contact || disable)
