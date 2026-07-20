@@ -21,6 +21,7 @@ export const login = async (payload: any, redirectPath?: string) => {
         message: firstError,
       };
     }
+    console.log("BASE URL IN LOGIN:", BASE_URL);
     const result = await axiosClient.httpPost(
       "/auth/login",
       parsedPayload.data
