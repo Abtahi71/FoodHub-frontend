@@ -46,7 +46,7 @@ export default function CategorySection() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header Section */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Categories</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Categories</h1>
         <p className="text-gray-600 dark:text-white mt-2">
           Browse by category or explore all restaurants
         </p>
@@ -59,7 +59,7 @@ export default function CategorySection() {
           {selectedCategory && (
             <button
               onClick={clearSelection}
-              className="flex items-center gap-1 px-4 py-2 bg-gray-100 text-gray-700 dark:text-white rounded-full whitespace-nowrap hover:bg-gray-200 transition-colors"
+              className="flex items-center gap-1 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-white rounded-full whitespace-nowrap hover:bg-gray-200 transition-colors"
             >
               <X className="h-4 w-4" />
               Clear

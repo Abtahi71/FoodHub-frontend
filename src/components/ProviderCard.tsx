@@ -35,8 +35,8 @@ export default function ProviderCard({ meal }: { meal: any }) {
             className={`
               ${
                 isOpen
-                  ? "bg-yellow-400 text-gray-900 dark:text-white hover:bg-yellow-500"
-                  : "bg-gray-200 text-gray-600 dark:text-white"
+                  ? "bg-yellow-400 text-gray-900  hover:bg-yellow-500"
+                  : "bg-gray-200 text-gray-600 "
               }
             `}
           >
