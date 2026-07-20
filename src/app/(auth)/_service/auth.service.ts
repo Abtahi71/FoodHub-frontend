@@ -71,6 +71,9 @@ export const login = async (payload: any, redirectPath?: string) => {
         err?.response?.data?.error ||
         err?.response?.data?.message ||
         "Login failed",
+      debugBaseUrl: BASE_URL, // temporary
+      debugErrorCode: err?.code, // temporary
+      debugErrorMessage: err?.message, // temporary
     };
   }
 };
