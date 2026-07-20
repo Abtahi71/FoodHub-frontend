@@ -90,7 +90,7 @@ export default function Navbar() {
                 🍔
               </span>
             </span>
-            <span className="text-gray-900 tracking-tight">
+            <span className="text-gray-900 dark:text-white tracking-tight">
               Food<span className="text-yellow-500 font-extrabold">Hub</span>
             </span>
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-500 group-hover:w-full transition-all duration-300"></span>
@@ -104,7 +104,7 @@ export default function Navbar() {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/"
-                    className="relative px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
+                    className="relative px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-white hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
                   >
                     <span className="relative z-10 flex items-center gap-2">
                       <Home className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -120,7 +120,7 @@ export default function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href="/MyOrders"
-                      className="relative px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
+                      className="relative px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-white hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
                     >
                       <span className="relative z-10">Your Orders</span>
                       <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-400/5 to-yellow-400/0 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300"></span>
@@ -140,7 +140,7 @@ export default function Navbar() {
                     {user.role === "PROVIDER" ? (
                       <Link
                         href={`/providerProfile/${user.id}`}
-                        className="relative px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
+                        className="relative px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-white hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
                       >
                         <span className="relative z-10 flex items-center gap-2">
                           <Store className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -151,7 +151,7 @@ export default function Navbar() {
                     ) : user.role === "CUSTOMER" ? (
                       <Link
                         href="/provider"
-                        className="relative px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
+                        className="relative px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-white hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
                       >
                         <span className="relative z-10 flex items-center gap-2">
                           <Store className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -170,7 +170,7 @@ export default function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href="/admin"
-                      className="relative px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
+                      className="relative px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-white hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
                     >
                       <span className="relative z-10 flex items-center gap-2">
                         <Shield className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -202,7 +202,7 @@ export default function Navbar() {
                         </div>
                         <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-400 border-2 border-white rounded-full"></span>
                       </div>
-                      <span className="text-sm font-semibold text-gray-800 hidden lg:block group-hover:text-yellow-600 transition-colors">
+                      <span className="text-sm font-semibold text-gray-800 dark:text-white hidden lg:block group-hover:text-yellow-600 transition-colors">
                         {user.name?.split(" ")[0] || "User"}
                       </span>
                     </div>
@@ -210,7 +210,7 @@ export default function Navbar() {
                       onClick={handleLogout}
                       variant="ghost"
                       size="sm"
-                      className="relative group px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50/80 rounded-xl transition-all duration-200 font-medium"
+                      className="relative group px-4 py-2 text-gray-600 dark:text-white hover:text-red-600 hover:bg-red-50/80 rounded-xl transition-all duration-200 font-medium"
                     >
                       <span className="relative z-10 flex items-center gap-2">
                         <LogOut className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -225,7 +225,7 @@ export default function Navbar() {
                   <div className="flex items-center gap-2 ml-2">
                     <Link
                       href="/login"
-                      className="relative px-5 py-2.5 text-sm font-medium text-gray-700 hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
+                      className="relative px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-white hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 group"
                     >
                       <span className="relative z-10">Login</span>
                       <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-400/5 to-yellow-400/0 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300"></span>
@@ -252,9 +252,9 @@ export default function Navbar() {
           >
             <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-400/5 to-yellow-400/0 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300"></span>
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6 text-gray-600 group-hover:rotate-90 transition-transform duration-300" />
+              <X className="h-6 w-6 text-gray-600 dark:text-white group-hover:rotate-90 transition-transform duration-300" />
             ) : (
-              <Menu className="h-6 w-6 text-gray-600 group-hover:scale-110 transition-transform duration-300" />
+              <Menu className="h-6 w-6 text-gray-600 dark:text-white group-hover:scale-110 transition-transform duration-300" />
             )}
           </button>
         </div>
@@ -266,7 +266,7 @@ export default function Navbar() {
               {/* Home Link */}
               <Link
                 href="/"
-                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100/50 hover:text-yellow-600 rounded-xl transition-all duration-200 group"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-white hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100/50 hover:text-yellow-600 rounded-xl transition-all duration-200 group"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <span className="p-2 bg-yellow-50 rounded-lg group-hover:scale-110 transition-transform">
@@ -281,7 +281,7 @@ export default function Navbar() {
                   {user.role === "PROVIDER" ? (
                     <Link
                       href={`/providerProfile/${user.id}`}
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100/50 hover:text-yellow-600 rounded-xl transition-all duration-200 group"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-white hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100/50 hover:text-yellow-600 rounded-xl transition-all duration-200 group"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <span className="p-2 bg-yellow-50 rounded-lg group-hover:scale-110 transition-transform">
@@ -292,7 +292,7 @@ export default function Navbar() {
                   ) : user.role === "CUSTOMER" ? (
                     <Link
                       href="/provider"
-                      className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100/50 hover:text-yellow-600 rounded-xl transition-all duration-200 group"
+                      className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-white hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100/50 hover:text-yellow-600 rounded-xl transition-all duration-200 group"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <span className="p-2 bg-yellow-50 rounded-lg group-hover:scale-110 transition-transform">
@@ -308,7 +308,7 @@ export default function Navbar() {
               {user?.role === "ADMIN" && (
                 <Link
                   href="/admin"
-                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100/50 hover:text-yellow-600 rounded-xl transition-all duration-200 group"
+                  className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-white hover:bg-gradient-to-r hover:from-yellow-50 hover:to-yellow-100/50 hover:text-yellow-600 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span className="p-2 bg-yellow-50 rounded-lg group-hover:scale-110 transition-transform">
@@ -345,7 +345,7 @@ export default function Navbar() {
                 <div className="flex flex-col gap-3 px-4 pt-2">
                   <Link
                     href="/login"
-                    className="px-5 py-3 text-center text-gray-700 hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 font-medium"
+                    className="px-5 py-3 text-center text-gray-700 dark:text-white hover:text-yellow-600 transition-all duration-200 rounded-xl hover:bg-yellow-50/80 font-medium"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Login

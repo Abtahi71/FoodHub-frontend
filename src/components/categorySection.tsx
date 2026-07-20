@@ -47,7 +47,7 @@ export default function CategorySection() {
       {/* Header Section */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Categories</h1>
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-600 dark:text-white mt-2">
           Browse by category or explore all restaurants
         </p>
       </div>
@@ -59,7 +59,7 @@ export default function CategorySection() {
           {selectedCategory && (
             <button
               onClick={clearSelection}
-              className="flex items-center gap-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-full whitespace-nowrap hover:bg-gray-200 transition-colors"
+              className="flex items-center gap-1 px-4 py-2 bg-gray-100 text-gray-700 dark:text-white rounded-full whitespace-nowrap hover:bg-gray-200 transition-colors"
             >
               <X className="h-4 w-4" />
               Clear
@@ -75,8 +75,8 @@ export default function CategorySection() {
                 px-5 py-2 rounded-full whitespace-nowrap font-medium transition-all duration-200
                 ${
                   selectedCategory === category.name
-                    ? "bg-yellow-400 text-gray-900 shadow-md shadow-yellow-200"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-yellow-400 text-gray-900 dark:text-white shadow-md shadow-yellow-200"
+                    : "bg-gray-100 text-gray-700 dark:text-white hover:bg-gray-200"
                 }
               `}
             >
@@ -94,7 +94,7 @@ export default function CategorySection() {
             {selectedCategory ? (
               <>
                 <Utensils className="h-5 w-5 text-yellow-400" />
-                <h2 className="text-xl font-semibold text-gray-900">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   <span className="text-yellow-600">{selectedCategory}</span>{" "}
                   Meals
                 </h2>
@@ -102,7 +102,7 @@ export default function CategorySection() {
             ) : (
               <>
                 <Store className="h-5 w-5 text-yellow-400" />
-                <h2 className="text-xl font-semibold text-gray-900">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   All Restaurants
                 </h2>
               </>
@@ -156,15 +156,15 @@ export default function CategorySection() {
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
                     <Utensils className="h-8 w-8 text-yellow-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                     No meals found
                   </h3>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-gray-600 dark:text-white mb-6">
                     No meals available in {selectedCategory} category
                   </p>
                   <button
                     onClick={clearSelection}
-                    className="px-6 py-2 bg-yellow-400 text-gray-900 rounded-lg hover:bg-yellow-500 transition-colors font-medium"
+                    className="px-6 py-2 bg-yellow-400 text-gray-900 dark:text-white rounded-lg hover:bg-yellow-500 transition-colors font-medium"
                   >
                     Browse all restaurants
                   </button>
@@ -188,12 +188,14 @@ export default function CategorySection() {
             ) : (
               <div className="text-center py-16 bg-background rounded-xl border border-gray-100">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
-                  <Store className="h-8 w-8 text-gray-400" />
+                  <Store className="h-8 w-8 text-gray-400 dark:text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                   No restaurants found
                 </h3>
-                <p className="text-gray-600">Please check back later</p>
+                <p className="text-gray-600 dark:text-white">
+                  Please check back later
+                </p>
               </div>
             )}
           </>

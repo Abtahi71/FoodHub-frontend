@@ -22,7 +22,7 @@ export default function HeroSection() {
   return (
     <section className="container ml-10 px-4 py-20 grid md:grid-cols-2 gap-10 items-center max-w-7xl mx-auto">
       <div className="space-y-6">
-        <h1 className="text-3xl text-green-800">
+        <h1 className="text-3xl text-green-800 dark:text-white">
           Welcome {user ? user.name : "Guest"}
         </h1>
 

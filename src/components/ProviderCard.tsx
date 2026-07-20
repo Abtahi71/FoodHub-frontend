@@ -35,8 +35,8 @@ export default function ProviderCard({ meal }: { meal: any }) {
             className={`
               ${
                 isOpen
-                  ? "bg-yellow-400 text-gray-900 hover:bg-yellow-500"
-                  : "bg-gray-200 text-gray-600"
+                  ? "bg-yellow-400 text-gray-900 dark:text-white hover:bg-yellow-500"
+                  : "bg-gray-200 text-gray-600 dark:text-white"
               }
             `}
           >
@@ -66,14 +66,14 @@ export default function ProviderCard({ meal }: { meal: any }) {
           )}
         </CardAction>
 
-        <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-yellow-600 transition-colors">
+        <CardTitle className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-yellow-600 transition-colors">
           {displayName}
         </CardTitle>
 
         <CardDescription className="flex flex-col gap-2">
           {/* Address */}
           {meal.address && (
-            <span className="flex items-center gap-1 text-sm text-gray-500">
+            <span className="flex items-center gap-1 text-sm text-gray-500 dark:text-white">
               <MapPin className="h-3.5 w-3.5 text-yellow-400" />
               {meal.address}
             </span>
@@ -81,7 +81,7 @@ export default function ProviderCard({ meal }: { meal: any }) {
 
           {/* Cuisine Type or Description */}
           {meal.cuisineType && meal.cuisineType.length > 0 && (
-            <span className="flex items-center gap-1 text-sm text-gray-600">
+            <span className="flex items-center gap-1 text-sm text-gray-600 dark:text-white">
               <Store className="h-3.5 w-3.5 text-yellow-400" />
               {meal.cuisineType.join(" • ")}
             </span>
@@ -89,7 +89,7 @@ export default function ProviderCard({ meal }: { meal: any }) {
 
           {/* Description for meals */}
           {meal.description && (
-            <p className="text-sm text-gray-600 line-clamp-2 mt-1">
+            <p className="text-sm text-gray-600 dark:text-white line-clamp-2 mt-1">
               {meal.description}
             </p>
           )}
@@ -99,7 +99,7 @@ export default function ProviderCard({ meal }: { meal: any }) {
       <CardFooter className="pt-0">
         <Button
           variant="ghost"
-          className="w-full group-hover:bg-yellow-400 group-hover:text-gray-900 transition-colors"
+          className="w-full group-hover:bg-yellow-400 group-hover:text-gray-900 dark:text-white transition-colors"
         >
           View Details
         </Button>
