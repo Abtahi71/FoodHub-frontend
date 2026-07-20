@@ -103,7 +103,7 @@ export const signup = async (payload: any, redirectPath?: string) => {
       };
     }
     const result = await axiosClient.httpPost(
-      "/auth/register",
+      "/auth/signup",
       parsedPayload.data
     );
     redirect(redirectPath || "/login");

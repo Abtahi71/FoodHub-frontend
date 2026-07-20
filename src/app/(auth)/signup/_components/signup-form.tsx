@@ -26,6 +26,7 @@ export function SignupForm({ redirectPath }: SignupFormProps) {
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (payload: any) => singupAction(payload),
+    
   });
 
   const form = useForm({
@@ -43,7 +44,7 @@ export function SignupForm({ redirectPath }: SignupFormProps) {
           return;
         }
       } catch (error: any) {
-        setServerError(error.message);
+        setServerError("Something went wrong");
       }
     },
   });
