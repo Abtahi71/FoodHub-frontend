@@ -33,7 +33,9 @@ export const login = async (payload: any, redirectPath?: string) => {
 
     // console.log('USER DATA',userData)
 
-    const { userId, role, name, email, status, isDeleted } = userData;
+    const { id, role, name, email, emailVerified } = userData;
+
+    console.log("THIS IS THE USER DATA", userData);
 
     console.log("THIS IS THE ROLE IN LOGIN", role);
     
