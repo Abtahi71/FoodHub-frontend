@@ -84,15 +84,23 @@ export function LoginForm({ redirectPath }: LoginFormProps) {
           <div className="flex justify-between mt-2">
             <Button
               onClick={() => {
-                form.setFieldValue("email", "john@gmail.com");
-                form.setFieldValue("password", "pass");
+                form.setFieldValue("email", "mustakimabtahi207@gmail.com");
+                form.setFieldValue("password", "123456");
               }}
             >
-              Demo Member
+              Demo Provider
             </Button>
             <Button
               onClick={() => {
-                form.setFieldValue("email", "Tony@gmail.com");
+                form.setFieldValue("email", "jake@gmail.com");
+                form.setFieldValue("password", "123456");
+              }}
+            >
+              Demo Customer
+            </Button>
+            <Button
+              onClick={() => {
+                form.setFieldValue("email", "mosh23@gmail.com");
                 form.setFieldValue("password", "password");
               }}
             >

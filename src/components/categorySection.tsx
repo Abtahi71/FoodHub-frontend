@@ -75,8 +75,8 @@ export default function CategorySection() {
                 px-5 py-2 rounded-full whitespace-nowrap font-medium transition-all duration-200
                 ${
                   selectedCategory === category.name
-                    ? "bg-yellow-400 text-gray-900 dark:text-white shadow-md shadow-yellow-200"
-                    : "bg-gray-100 text-gray-700 dark:text-white hover:bg-gray-200"
+                    ? "bg-yellow-400 text-gray-900 shadow-md shadow-yellow-200"
+                    : "bg-gray-100 text-gray-700  hover:bg-gray-200"
                 }
               `}
             >
