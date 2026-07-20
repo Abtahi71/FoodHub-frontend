@@ -21,11 +21,21 @@ export const login = async (payload: any, redirectPath?: string) => {
         message: firstError,
       };
     }
+
+    
     console.log("BASE URL IN LOGIN:", BASE_URL);
     const result = await axiosClient.httpPost(
       "/auth/login",
       parsedPayload.data
     );
+
+    if (!result?.data?.userData) {
+      return {
+        success: false,
+        message: "Login failed",
+        debugRawResult: JSON.stringify(result),
+      };
+    }
 
     const { userData, accessToken, refreshToken } = result.data;
 
@@ -36,6 +46,7 @@ export const login = async (payload: any, redirectPath?: string) => {
     const { id, role, name, email, emailVerified } = userData;
 
     console.log("THIS IS THE USER DATA", userData);
+    console.log("THIS IS THE ID IN LOGIN", id);
 
     console.log("THIS IS THE ROLE IN LOGIN", role);
     
