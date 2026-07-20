@@ -49,7 +49,7 @@ export default function ProviderCard({ meal }: { meal: any }) {
         {/* Category/Cuisine Tag */}
         {meal.category?.name && (
           <div className="absolute -top-3 left-4 z-30">
-            <Badge variant="outline" className="bg-white shadow-sm">
+            <Badge variant="outline" className="bg-background shadow-sm">
               {meal.category.name}
             </Badge>
           </div>

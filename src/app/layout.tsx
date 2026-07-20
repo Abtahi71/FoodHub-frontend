@@ -4,6 +4,12 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/Footer";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import Providers from "@/providers/QueryProviders";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +31,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const queryClient = new QueryClient();
 
   
   return (
@@ -32,10 +39,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        {children}
-        <Footer/>
-        <Toaster />
+        <Providers>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <Navbar />
+            {children}
+          </HydrationBoundary>
+          <Footer />
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

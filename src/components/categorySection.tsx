@@ -5,52 +5,36 @@ import Link from "next/link";
 import ProviderCard from "./ProviderCard";
 
 import { ChevronRight, X, Filter, Utensils, Store } from "lucide-react";
-import { getCategories, getCategoryProviders } from "@/services/category.service";
-import { getProviders } from "@/services/provider.service";
+import { useQuery } from "@tanstack/react-query";
+import {
+  getCategoriesAction,
+  getCategoryProvidersAction,
+} from "@/_actions/category.action";
+import { getProvidersAction } from "@/app/(Provider)/_actions/providerActions";
 
 export default function CategorySection() {
   const [meals, setMeals] = useState([]);
-  const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        const data = await getCategories();
-        setCategories(data);
-      } catch (e: any) {
-        console.log(e);
-        setCategories([]);
-      }
-      setLoading(false);
-    };
-    fetchCategories();
-  }, []);
+  const { data: categories, isLoading } = useQuery({
+    queryKey: ["category"],
+    queryFn: getCategoriesAction,
+  });
 
-  useEffect(() => {
-    const AllProviders = async () => {
-      const data = await getProviders();
-      console.log(data);
-      setProviders(data.data);
-    };
-    AllProviders();
-  }, []);
+  const { data: providers, isLoading: isProviderLoading } = useQuery({
+    queryKey: ["providers"],
+    queryFn: () => getProvidersAction(),
+  });
+
+  const { data, isLoading: isCategoryLoading } = useQuery({
+    queryKey: ["category", selectedCategory],
+    queryFn: () => getCategoryProvidersAction(selectedCategory),
+    enabled: selectedCategory !== "",
+  });
 
   const handleClick = async (name: string) => {
-    setLoading(true);
     setSelectedCategory(name);
-    try {
-      console.log("Fetching meals for:", name);
-      const data = await getCategoryProviders(name);
-      setMeals(data.result);
-    } catch (e: any) {
-      console.log(e);
-      setMeals([]);
-    }
-    setLoading(false);
   };
 
   const clearSelection = () => {
@@ -83,7 +67,7 @@ export default function CategorySection() {
           )}
 
           {/* Category Buttons */}
-          {categories?.map((category: any) => (
+          {categories?.categories.map((category: any) => (
             <button
               key={category.name}
               onClick={() => handleClick(category.name)}
@@ -142,7 +126,7 @@ export default function CategorySection() {
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 animate-pulse"
+                className="bg-background rounded-xl shadow-sm border border-gray-100 p-5 animate-pulse"
               >
                 <div className="aspect-video w-full bg-gray-200 rounded-lg mb-4"></div>
                 <div className="h-5 bg-gray-200 rounded w-3/4 mb-3"></div>
@@ -168,7 +152,7 @@ export default function CategorySection() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-16 bg-white rounded-xl border border-gray-100">
+                <div className="text-center py-16 bg-background rounded-xl border border-gray-100">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
                     <Utensils className="h-8 w-8 text-yellow-600" />
                   </div>
@@ -187,10 +171,10 @@ export default function CategorySection() {
                 </div>
               )
             ) : /* All Restaurants View */
-            providers.length > 0 ? (
+            providers?.data.length > 0 ? (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {providers.map((provider: any, index) => (
+                  {providers?.data.map((provider: any, index: any) => (
                     <Link
                       key={`${provider.id}-${index}`}
                       href={`/provider/${provider.id}`}
@@ -202,7 +186,7 @@ export default function CategorySection() {
                 </div>
               </>
             ) : (
-              <div className="text-center py-16 bg-white rounded-xl border border-gray-100">
+              <div className="text-center py-16 bg-background rounded-xl border border-gray-100">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
                   <Store className="h-8 w-8 text-gray-400" />
                 </div>

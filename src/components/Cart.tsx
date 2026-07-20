@@ -5,7 +5,11 @@ import { toast } from "sonner";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { ShoppingCart, Trash2, X } from "lucide-react";
-import { ClearCart, GetCart } from "@/services/order.service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  ClearCartAction,
+  GetCartAction,
+} from "@/app/(Orders)/_actions/order.action";
 
 type CartItem = {
   providerMeal: {
@@ -23,49 +27,33 @@ type CartItem = {
 };
 
 export default function Cart() {
-  const [items, setItems] = useState<CartItem[]>([]);
-  const [totalAmount, setTotalAmount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [id, setId] = useState("");
 
-  const fetchCart = async () => {
-    const cart = await GetCart();
-    if (cart?.data?.cart?.items) {
-      setItems(cart.data.cart.items);
-      setTotalAmount(cart.data.totalAmount);
-      setId(cart.data.cart.id);
-    }
-  };
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    fetchCart();
-  }, []);
+  const { data: cart, isLoading } = useQuery({
+    queryKey: ["cart"],
+    queryFn: GetCartAction,
+  });
 
-  
-  useEffect(() => {
-   
-    const handleCartUpdate = () => {
-      fetchCart();
-    };
+  const items = cart?.data?.cart?.items ?? [];
+  const totalAmount = cart?.data?.totalAmount ?? 0;
+  const id = cart?.data?.cart?.id ?? "";
 
-    window.addEventListener("cart-updated", handleCartUpdate);
+  const { mutate: ClearCart, isPending } = useMutation({
+    mutationFn: ClearCartAction,
+    onSuccess: () => {
+      toast.success("Cart cleared successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["cart"],
+      });
+    },
+    onError: () => {
+      toast.error("Failed to clear cart");
+    },
+  });
 
-    return () => {
-      window.removeEventListener("cart-updated", handleCartUpdate);
-    };
-  }, []);
-
-  const clearCart = async () => {
-    const response = await ClearCart();
-    console.log(response.message);
-    if (response.ok) {
-      setItems([]);
-      setTotalAmount(0);
-    }
-    toast(response.message);
-  };
-
-  const itemCount = items.length;
+  const itemCount = items?.length;
 
   return (
     <div>
@@ -87,9 +75,9 @@ export default function Cart() {
       {/* Cart Modal */}
       {isModalOpen && (
         <div className="fixed mt-100 inset-0 z-51 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl shadow-2xl animate-in fade-in zoom-in duration-200">
+          <div className="bg-background w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl shadow-2xl animate-in fade-in zoom-in duration-200">
             {/* Header */}
-            <div className="sticky top-0 bg-white border-b border-gray-100 p-4 flex items-center justify-between">
+            <div className="sticky top-0 bg-background border-b border-gray-100 p-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ShoppingCart className="h-5 w-5 text-yellow-400" />
                 <h2 className="text-lg font-semibold text-gray-900">
@@ -111,7 +99,7 @@ export default function Cart() {
 
             {/* Cart Items */}
             <div className="p-4">
-              {items.length === 0 ? (
+              {items?.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
                     <ShoppingCart className="h-8 w-8 text-yellow-600" />
@@ -126,7 +114,7 @@ export default function Cart() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {items.map((item, index) => (
+                  {items?.map((item: any, index: any) => (
                     <div
                       key={index}
                       className="flex gap-4 p-3 border border-gray-100 rounded-lg"
@@ -169,7 +157,7 @@ export default function Cart() {
                   ))}
 
                   {/* Total */}
-                  {items.length > 0 && (
+                  {items?.length > 0 && (
                     <div className="mt-6 pt-4 border-t border-gray-100">
                       <div className="flex items-center justify-between text-lg font-bold">
                         <span className="text-gray-900">Total</span>
@@ -182,17 +170,20 @@ export default function Cart() {
             </div>
 
             {/* Footer Actions */}
-            {items.length > 0 && (
-              <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
+            {items?.length > 0 && (
+              <div className="sticky bottom-0 bg-background border-t border-gray-100 p-4">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link href={`/checkOut/${id}`} className="flex-1">
-                    <Button className="w-full bg-yellow-400 text-gray-900 hover:bg-yellow-500 font-semibold py-6">
+                    <Button
+                      className="w-full bg-yellow-400 text-gray-900 hover:bg-yellow-500 font-semibold py-6"
+                      onClick={() => setIsModalOpen(false)}
+                    >
                       Proceed to Checkout
                     </Button>
                   </Link>
                   <Button
                     variant="outline"
-                    onClick={clearCart}
+                    onClick={() => ClearCart()}
                     className="flex-1 border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 py-6"
                   >
                     <Trash2 className="h-4 w-4 mr-2" />

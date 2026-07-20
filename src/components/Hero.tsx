@@ -5,28 +5,25 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { authClient } from "@/lib/auth";
 import { useState, useEffect } from "react";
-import { getUser } from "@/services/auth.service";
 
+import { getUserInfoAction } from "@/app/(auth)/_actions/auth.action";
+import { useQuery } from "@tanstack/react-query";
 
 export default function HeroSection() {
- 
   const [mounted, setMounted] = useState(false);
-  const [user, setUser] = useState<any>(null);
- 
-  useEffect(() => {
-    const getCurrentUser = async () => {
-      const userData = await getUser();
-      setUser(userData);
-    };
-    getCurrentUser();
-  }, []);
+
+
+  const { data: user, isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUserInfoAction(),
+  });
 
   // Always render the same structure, only change the content
   return (
     <section className="container ml-10 px-4 py-20 grid md:grid-cols-2 gap-10 items-center max-w-7xl mx-auto">
       <div className="space-y-6">
         <h1 className="text-3xl text-green-800">
-          Welcome { user ? user.name : "Guest"}
+          Welcome {user ? user.name : "Guest"}
         </h1>
 
         <Badge>🍔 Fast & Fresh</Badge>
@@ -49,7 +46,7 @@ export default function HeroSection() {
       </div>
 
       <div className="relative h-87.5">
-        <Image src="/burger.jpg" alt="Food" fill className="object-contain" />
+        <Image src="/burger4.png" alt="Food" fill className="object-contain" />
       </div>
     </section>
   );

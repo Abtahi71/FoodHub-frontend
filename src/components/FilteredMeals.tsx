@@ -17,6 +17,8 @@ import {
   Store,
   Tag,
 } from "lucide-react";
+import { getCategoriesAction } from "@/_actions/category.action";
+import { useQuery } from "@tanstack/react-query";
 
 type Meal = {
   id: string;
@@ -39,34 +41,33 @@ type Meal = {
 };
 
 export default function FilteredMealCard() {
-  const [meals, setMeals] = useState<Meal[]>([]);
   const [search, setSearch] = useState("");
+  const [submittedSearch, setSubmittedSearch] = useState("");
   const [category, setCategory] = useState("");
   const [rating, setRating] = useState("");
   const [isAvailable, setIsAvailable] = useState("");
   const [sortBy, setSortBy] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState("desc");
-  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const data = await getCategories();
-        setCategories(data);
-      } catch (e: any) {
-        console.log(e);
-        setCategories([]);
-      }
-    };
-    fetchCategories();
-  }, []);
+  const { data: categories, isLoading } = useQuery({
+    queryKey: ["category"],
+    queryFn: getCategoriesAction,
+  });
 
-  const fetchMeals = async () => {
-    setLoading(true);
-    try {
-      const data = await getMeals({
+  const { data, isLoading: isCategoryLoading } = useQuery({
+    queryKey: [
+      "meals",
+      search,
+      category,
+      rating,
+      isAvailable,
+      sortBy,
+      sortOrder,
+    ],
+    queryFn: () =>
+      getMeals({
         search,
         category,
         ratings: rating,
@@ -75,21 +76,14 @@ export default function FilteredMealCard() {
         sortOrder,
         page: "1",
         limit: "10",
-      });
+      }),
+  });
 
-      setMeals(data.data.data);
-     // toast.success("Meals loaded successfully 🍽️");
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to fetch meals. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+  const handleSearch = () => {
+    setSubmittedSearch(search);
   };
 
-  useEffect(() => {
-    fetchMeals();
-  }, []);
+  const meals = data?.data.data;
 
   const getAverageRating = (reviews: { rating: number }[]) => {
     if (!reviews || reviews.length === 0) return null;
@@ -104,8 +98,13 @@ export default function FilteredMealCard() {
     setIsAvailable("");
     setSortBy("createdAt");
     setSortOrder("desc");
-    fetchMeals();
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  console.log("THIS IS THE CATEGORIES NSNDKSND", categories);
 
   const hasActiveFilters = search || category || rating || isAvailable;
 
@@ -127,11 +126,15 @@ export default function FilteredMealCard() {
             placeholder="Search for meals, cuisines, or restaurants..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
             className="pl-10 pr-24 py-6 text-base border-gray-200 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-            onKeyDown={(e) => e.key === "Enter" && fetchMeals()}
           />
           <Button
-            onClick={fetchMeals}
+            onClick={handleSearch}
             className="absolute right-1.5 top-1/2 transform -translate-y-1/2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg px-6"
             size="sm"
           >
@@ -141,7 +144,7 @@ export default function FilteredMealCard() {
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-8">
+      <div className="bg-background rounded-xl shadow-sm border border-gray-100 p-4 mb-8">
         <div className="flex items-center justify-between mb-4 lg:mb-0 lg:hidden">
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -167,12 +170,12 @@ export default function FilteredMealCard() {
             <div className="relative">
               <Tag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <select
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg appearance-none bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg appearance-none bg-background text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">All Categories</option>
-                {categories?.map((cat: any) => (
+                {categories?.categories.map((cat: any) => (
                   <option key={cat.id} value={cat.name}>
                     {cat.name}
                   </option>
@@ -184,7 +187,7 @@ export default function FilteredMealCard() {
             <div className="relative">
               <Star className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <select
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg appearance-none bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg appearance-none bg-background text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
               >
@@ -199,7 +202,7 @@ export default function FilteredMealCard() {
             <div className="relative">
               <Store className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <select
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg appearance-none bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg appearance-none bg-background text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 value={isAvailable}
                 onChange={(e) => setIsAvailable(e.target.value)}
               >
@@ -213,7 +216,7 @@ export default function FilteredMealCard() {
             <div className="relative">
               <ArrowUpDown className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <select
-                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg appearance-none bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg appearance-none bg-background text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 value={`${sortBy},${sortOrder}`}
                 onChange={(e) => {
                   const [field, order] = e.target.value.split(",");
@@ -230,7 +233,7 @@ export default function FilteredMealCard() {
 
             {/* Apply Button */}
             <Button
-              onClick={fetchMeals}
+              onClick={handleSearch}
               disabled={loading}
               className="bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg py-2.5"
             >
@@ -300,7 +303,7 @@ export default function FilteredMealCard() {
       {/* Results Count */}
       <div className="mb-6 flex items-center justify-between">
         <p className="text-sm text-gray-600">
-          Showing <span className="font-semibold">{meals.length}</span> results
+          Showing <span className="font-semibold">{meals?.length}</span> results
         </p>
       </div>
 
@@ -310,7 +313,7 @@ export default function FilteredMealCard() {
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 animate-pulse"
+              className="bg-background rounded-xl shadow-sm border border-gray-100 p-4 animate-pulse"
             >
               <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
               <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
@@ -321,7 +324,7 @@ export default function FilteredMealCard() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {meals.map((meal) => {
+          {meals?.map((meal: any) => {
             const avgRating = getAverageRating(meal.provider.reviews);
 
             return (
@@ -330,7 +333,7 @@ export default function FilteredMealCard() {
                 key={meal.id}
                 className="group"
               >
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-all duration-200 hover:border-yellow-200 h-full flex flex-col">
+                <div className="bg-background rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-all duration-200 hover:border-yellow-200 h-full flex flex-col">
                   {/* Header */}
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="text-lg font-semibold text-gray-900 group-hover:text-yellow-600 transition-colors line-clamp-1">
@@ -385,8 +388,8 @@ export default function FilteredMealCard() {
       )}
 
       {/* Empty State */}
-      {!loading && meals.length === 0 && (
-        <div className="text-center py-16 bg-white rounded-xl border border-gray-100">
+      {!loading && meals?.length === 0 && (
+        <div className="text-center py-16 bg-background rounded-xl border border-gray-100">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
             <Search className="h-8 w-8 text-gray-400" />
           </div>
