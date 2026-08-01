@@ -6,7 +6,7 @@ A modern **Food Ordering & Restaurant Management Platform** built with **Next.js
 
 ## 📖 Overview
 
-FoodHub is a full-stack web application where customers can discover restaurants, browse menus, add food items to their cart, and place orders. Restaurant owners can register and manage one or more restaurants, while administrators oversee users, restaurants, and platform activities.
+FoodHub is a full-stack web application where customers can discover restaurants, browse menus, add food items to their cart, and place orders. Restaurant owners can register and manage one or more restaurants, while administrators oversee users, restaurants, and platform activities!!!!!.
 
 ---
 
