@@ -9,7 +9,6 @@ jobs:
     steps:
       - name: Print a message
         run: |
-          pwd
-          ls -a
-          echo $GITHUB_WORKSPACE
+          node -v
+          git -v
 
