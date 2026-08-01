@@ -1,0 +1,14 @@
+name: my-job
+
+on: push
+
+jobs:
+  my-first-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print a message
+        run: echo "Hello from github"
+
+      - name: Check linting
+        run: echo "Lint check"
