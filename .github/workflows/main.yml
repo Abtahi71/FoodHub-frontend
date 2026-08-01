@@ -8,7 +8,8 @@ jobs:
 
     steps:
       - name: Print a message
-        run: echo "Hello from github"
+        run: |
+          pwd
+          ls -a
+          echo $GITHUB_WORKSPACE
 
-      - name: Check linting
-        run: echo "Lint check"
