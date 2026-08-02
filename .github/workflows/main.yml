@@ -7,8 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print a message
-        run: |
-          node -v
-          git -v
+      - name: copying code
+        uses: actions/checkout@v4
+
+      - name: installing node
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 24.12.0
+        
+      - name: check node version
+        run : node --version
+          
 
